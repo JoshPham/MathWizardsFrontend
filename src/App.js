@@ -12,26 +12,50 @@ import FifthGrade from './pages/grades/FifthGrade';
 import NoPage from './pages/NoPage';
 import "./App.css";
 
-function App() {
-  return (
-    <div>
+import axios from 'axios';
+import React from 'react';
+
+class App extends React.Component {
+  state = { details: [] }
+
+  componentDidMount() {
+    let data;
+    axios.get('http://localhost:8000')
+      .then(res => {
+        data = res.data;
+        this.setState({
+          details: data
+        });
+      })
+      .catch(err => {})
+  }
+
+  render() {
+    return (
+      // <div>
+      //   <h1>django generated</h1>
+      //   {/* {this.state.details.map((output, id) => (
+      //     <div key={id}>
+      //       <h1>{output.question}</h1>
+      // </div>
+      //   ))} */}
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home/>}/>
-          <Route path="/About" element={<About/>}/>
-          <Route path="/Settings" element={<Settings/>}/>
-          <Route path="/Grades" element={<Grades/>}/>
-          <Route path="/Kindergarten" element={<Kindergarten/>}/>
-          <Route path="/FirstGrade" element={<FirstGrade/>}/>
-          <Route path="/SecondGrade" element={<SecondGrade/>}/>
-          <Route path="/ThirdGrade" element={<ThirdGrade/>}/>
-          <Route path="/FourthGrade" element={<FourthGrade/>}/>
-          <Route path="/FifthGrade" element={<FifthGrade/>}/>
-          <Route path="*" element={<NoPage/>}/>
+          <Route index element={<Home />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Settings" element={<Settings />} />
+          <Route path="/Grades" element={<Grades details={this.state.details} />} />
+          <Route path="/Kindergarten" element={<Kindergarten />} />
+          <Route path="/FirstGrade" element={<FirstGrade />} />
+          <Route path="/SecondGrade" element={<SecondGrade />} />
+          <Route path="/ThirdGrade" element={<ThirdGrade />} />
+          <Route path="/FourthGrade" element={<FourthGrade />} />
+          <Route path="/FifthGrade" element={<FifthGrade />} />
+          <Route path="*" element={<NoPage />} />
         </Routes>
       </BrowserRouter>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
