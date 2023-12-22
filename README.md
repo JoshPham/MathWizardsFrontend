@@ -1,1 +1,2 @@
 # ReactDjango-Frontend
+# MathWizardsFrontend
