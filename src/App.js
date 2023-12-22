@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-rou
 import Home from './pages/Home';
 import About from './pages/About';
 import Settings from './pages/Settings';
-import Grades from './pages/Grades';
+import Grades from './pages/grades/Grades';
 import Kindergarten from './pages/grades/Kindergarten';
 import FirstGrade from './pages/grades/FirstGrade';
 import SecondGrade from './pages/grades/SecondGrade';
@@ -19,32 +19,26 @@ class App extends React.Component {
   state = { details: [] }
 
   componentDidMount() {
-    let data;
-    axios.get('http://localhost:8000')
+    axios.get('http://localhost:8000/grade/')  // Make sure to include the trailing slash
       .then(res => {
-        data = res.data;
+        const data = res.data;
         this.setState({
           details: data
         });
       })
-      .catch(err => {})
+      .catch(err => {
+        console.error('Error fetching data:', err);
+      });
   }
 
   render() {
     return (
-      // <div>
-      //   <h1>django generated</h1>
-      //   {/* {this.state.details.map((output, id) => (
-      //     <div key={id}>
-      //       <h1>{output.question}</h1>
-      // </div>
-      //   ))} */}
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Settings" element={<Settings />} />
-          <Route path="/Grades" element={<Grades details={this.state.details} />} />
+          <Route path="/Grades" element={<Grades data={this.state.details} />} />
           <Route path="/Kindergarten" element={<Kindergarten />} />
           <Route path="/FirstGrade" element={<FirstGrade />} />
           <Route path="/SecondGrade" element={<SecondGrade />} />
