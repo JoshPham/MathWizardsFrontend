@@ -17,6 +17,12 @@ class Grades extends React.Component {
                 <div key={grade.grade_id}>
                   <h2>{grade.title}</h2>
                   <p>Description: {grade.description}</p>
+                  <h3>Units:</h3>
+                  <ul>
+                    {grade.units.map((unit) => (
+                      <li key={unit.unit_id}>{unit.title}</li>
+                    ))}
+                  </ul>
                 </div>
               ))
             ) : (

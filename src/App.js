@@ -10,24 +10,42 @@ import ThirdGrade from './pages/grades/ThirdGrade';
 import FourthGrade from './pages/grades/FourthGrade';
 import FifthGrade from './pages/grades/FifthGrade';
 import NoPage from './pages/NoPage';
-import "./App.css";
-
 import axios from 'axios';
 import React from 'react';
+import "./App.css";
 
 class App extends React.Component {
-  state = { details: [] }
+  state = { grades: [] }
 
   componentDidMount() {
-    axios.get('http://localhost:8000/grade/')  // Make sure to include the trailing slash
+    // Fetch grade data
+    axios.get('http://localhost:8000/grade/')
       .then(res => {
-        const data = res.data;
-        this.setState({
-          details: data
+        const grades = res.data;
+        this.setState({ grades });
+
+        // Fetch unit data for each grade
+        grades.forEach(grade => {
+          axios.get(`http://localhost:8000/units/${grade.grade_id}/`)
+            .then(res => {
+              const units = res.data;
+              const updatedGrades = this.state.grades.map(g => {
+                if (g.grade_id === grade.grade_id) {
+                  return { ...g, units: units };
+                }
+                return g;
+              });
+              this.setState({
+                grades: updatedGrades
+              });
+            })
+            .catch(err => {
+              console.error(`Error fetching unit data for grade ${grade.grade_id}:`, err);
+            });
         });
       })
       .catch(err => {
-        console.error('Error fetching data:', err);
+        console.error('Error fetching grade data:', err);
       });
   }
 
@@ -38,7 +56,7 @@ class App extends React.Component {
           <Route index element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Settings" element={<Settings />} />
-          <Route path="/Grades" element={<Grades data={this.state.details} />} />
+          <Route path="/Grades" element={<Grades data={this.state.grades} />} />
           <Route path="/Kindergarten" element={<Kindergarten />} />
           <Route path="/FirstGrade" element={<FirstGrade />} />
           <Route path="/SecondGrade" element={<SecondGrade />} />

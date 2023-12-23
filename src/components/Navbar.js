@@ -1,11 +1,11 @@
 import "./NavbarStyles.css";
 
 export default function Navbar() {
-    return(
+    return (
         <>
             <nav>
                 <ul>
-                    <div class="item-1">
+                    <div className="item-1">
                         <li>
                             <a href="/grades/" id="grade">Grades ⮟</a>
                             <ul className="dropdown">
@@ -16,16 +16,15 @@ export default function Navbar() {
                                 <li><a href="/fourthgrade/">Fourth Grade</a></li>
                                 <li><a href="/fifthgrade/">Fifth Grade</a></li>
                             </ul>
-                        </li> 
-                        <li class="logo"><a href="/">LOGO Math Wizards</a></li> 
+                        </li>
+                        <li className="logo"><a href="/">LOGO Math Wizards</a></li>
                     </div>
-                    <div class="item-2">
-                        <li><a href="/about/">About Us</a></li> 
-                        <li><a href="/settings/">Settings</a></li> 
+                    <div className="item-2">
+                        <li><a href="/about/">About Us</a></li>
+                        <li><a href="/settings/">Settings</a></li>
                     </div>
                 </ul>
-            </nav>     
-                        
+            </nav>
         </>
-    )
+    );
 }
