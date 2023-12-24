@@ -17,36 +17,31 @@ import "./App.css";
 class App extends React.Component {
   state = { grades: [] }
 
-  componentDidMount() {
-    // Fetch grade data
-    axios.get('http://localhost:8000/grade/')
-      .then(res => {
-        const grades = res.data;
-        this.setState({ grades });
-
-        // Fetch unit data for each grade
-        grades.forEach(grade => {
-          axios.get(`http://localhost:8000/units/${grade.grade_id}/`)
-            .then(res => {
-              const units = res.data;
-              const updatedGrades = this.state.grades.map(g => {
-                if (g.grade_id === grade.grade_id) {
-                  return { ...g, units: units };
-                }
-                return g;
-              });
-              this.setState({
-                grades: updatedGrades
-              });
-            })
-            .catch(err => {
-              console.error(`Error fetching unit data for grade ${grade.grade_id}:`, err);
-            });
+  async componentDidMount() {
+    try {
+      const gradeResponse = await axios.get('http://localhost:8000/grade/');
+      const grades = gradeResponse.data;
+      this.setState({ grades });
+  
+      // Fetch unit data for each grade
+      for (const grade of grades) {
+        const unitResponse = await axios.get(`http://localhost:8000/units/${grade.grade_id}/`);
+        const units = unitResponse.data;
+  
+        const updatedGrades = this.state.grades.map(g => {
+          if (g.grade_id === grade.grade_id) {
+            return { ...g, units: units };
+          }
+          return g;
         });
-      })
-      .catch(err => {
-        console.error('Error fetching grade data:', err);
-      });
+  
+        this.setState({
+          grades: updatedGrades
+        });
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   }
 
   render() {
