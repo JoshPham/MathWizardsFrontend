@@ -15,13 +15,20 @@ class Grades extends React.Component {
             data.length > 0 ? (
               data.map((grade) => (
                 <div key={grade.grade_id}>
-                  <h2>{grade.title}</h2>
-                  <p>Description: {grade.description}</p>
-                  <h3>Units:</h3>
+                  <div className="grade">
+                    <h2 class="grade-title">{grade.title}</h2>
+                    <p>Description: {grade.description}</p>
+                  </div>
+
+                  <h3 class="unit-list">Units:</h3>
                   <ul>
                     {grade.units.map((unit) => (
-                      <li key={unit.unit_id}>{unit.title}</li>
+                      <li key={unit.unit_id}>
+                        <p class="unit-title">{unit.title}</p>
+                        <p class="unit-description">{unit.description}</p>
+                      </li>
                     ))}
+                    <hr class="line"/>
                   </ul>
                 </div>
               ))
