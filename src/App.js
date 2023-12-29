@@ -18,7 +18,6 @@ class App extends React.Component {
       const grades = gradeResponse.data;
       this.setState({ grades });
 
-      // Fetch unit data for each grade
       for (const grade of grades) {
         const unitResponse = await axios.get(`http://localhost:8000/units/${grade.grade_id}/`);
         const units = unitResponse.data;
