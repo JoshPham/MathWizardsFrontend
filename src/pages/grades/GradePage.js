@@ -1,6 +1,6 @@
 import Navbar from "../../components/Navbar";
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 const GradePage = ({ grades }) => {
   const { gradeNumber } = useParams();
@@ -15,6 +15,7 @@ const GradePage = ({ grades }) => {
   return (
     <>
       <Navbar />
+      <Link to="/Grades">Back to All Grades</Link>
       <h1>{gradeData.title}</h1>
       <p>Description: {gradeData.description}</p>
 

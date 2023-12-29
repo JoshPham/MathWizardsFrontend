@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import './Grades.css';
+import { Link } from 'react-router-dom';
 
 class Grades extends React.Component {
   state = {
@@ -31,7 +32,7 @@ class Grades extends React.Component {
                 data.map((grade) => (
                   <div key={grade.grade_id}>
                     <div className="grade">
-                      <h2 className="grade-title">{grade.title}</h2>
+                      <h2 className="grade-title"><Link to={`/grades/${grade.grade_id}`}>{grade.title}</Link></h2>
                       <p>Description: {grade.description}</p>
                     </div>
 
