@@ -26,6 +26,7 @@ nav a:hover {
 
 .logo {
   flex: 1;
+  padding: 0.25rem;
 }
 
 .logo .logo-elements {
@@ -47,7 +48,7 @@ nav a:hover {
 }
 
 .logo img {
-  width: 40px;
+  width: 30px;
   margin-right: 10px;
 }
 
@@ -60,6 +61,7 @@ nav a:hover {
   display: flex;
   align-items: center;
   list-style: none;
+  margin-right: 0.25rem;
 }
 
 nav ul li ul.dropdown {
