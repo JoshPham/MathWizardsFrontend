@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../../components/Navbar';
 import './Grades.css';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +20,6 @@ class Grades extends React.Component {
 
     return (
       <>
-        <Navbar />
         <div className="container">
           <h1>All Grades</h1>
           {loading ? (

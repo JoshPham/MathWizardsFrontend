@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import Settings from './pages/Settings';
@@ -41,14 +42,17 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Settings" element={<Settings />} />
-          <Route path="/Grades" element={<Grades data={this.state.grades} />} />
-          <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
-          <Route path="*" element={<NoPage />} />
-        </Routes>
+        <div>
+          <Navbar />
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="/About" element={<About />} />
+            <Route path="/Settings" element={<Settings />} />
+            <Route path="/Grades" element={<Grades data={this.state.grades} />} />
+            <Route path="/grades/:gradeNumber" element={<GradePage grades={this.state.grades} />} />
+            <Route path="*" element={<NoPage />} />
+          </Routes>
+        </div>
       </Router>
     );
   }
