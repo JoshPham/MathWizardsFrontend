@@ -18,7 +18,6 @@ const GradePage = ({ grades }) => {
         <h1>{gradeData.title}</h1>
         <p>Description: {gradeData.description}</p>
 
-        {/* Render Units */}
         <h2>Units:</h2>
         <ul>
           {Array.isArray(gradeData.units) && gradeData.units.length > 0 ? (
